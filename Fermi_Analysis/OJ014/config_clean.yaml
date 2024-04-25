@@ -1,0 +1,62 @@
+binning:
+  binsperdec: 8
+  binsz: 0.1
+  roiwidth: 10.0
+  coordsys: CEL
+
+data:
+  evfile: /home/praktikum/kfischer/BA-FermiAnalysis/OJ014/events.txt
+  scfile: /home/praktikum/kfischer/BA-FermiAnalysis/OJ014/SC00.fits
+  #ltcube : /home/praktikum/kfischer/BA-FermiAnalysis/OJ014/data_clean/ltcube_00.fits
+
+fileio:
+  outdir: "data_clean"
+
+gtlike:
+  edisp: true
+  irfs: P8R3_SOURCE_V3 #Aktuelle version
+  edisp_disable: ['isodiff']  
+
+model:
+  catalogs: 
+    - /home/praktikum/fermi_laboratory/data/dr4-gll_psc_v32.xml
+  galdiff: "/home/praktikum/miniforge3/envs/fermipy/share/fermitools/refdata/fermi/galdiffuse/gll_iem_v07.fits"
+  isodiff: "/home/praktikum/miniforge3/envs/fermipy/share/fermitools/refdata/fermi/galdiffuse/iso_P8R3_SOURCE_V3_v1.txt" 
+  src_roiwidth: 15.0
+
+selection:
+  emax: 300000
+  emin: 100
+  evclass: 128
+  evtype: 3
+  filter: (DATA_QUAL>0)&&(LAT_CONFIG==1)&&(angsep(RA_SUN,DEC_SUN,238.929350, 11.190101)>8.0)
+  target: '4FGL J0811.4+0146'  #jeweils anzupassen
+  tmin: 239557417 #Anzupassen an jeweilige Analyse!!
+  tmax: 731499937 #Anpassen!
+  zmax: 90
+  
+sourcefind:
+  multithread: True
+  nthread: 4
+  
+residmap:
+  make_plots: True
+  
+tsmap:
+  make_plots: True
+  multithread: True
+  nthread: 4
+  
+sed:
+  make_plots: True
+  
+lightcurve:
+  multithread: True
+  nthread: 4 
+  make_plots: False #find die Plots nicht...
+
+  #optimizer:
+  #verbosity: 3
+
+  #roiopt:
+  #shape_ts_threshold: 500000000.0 #für optimize() 
